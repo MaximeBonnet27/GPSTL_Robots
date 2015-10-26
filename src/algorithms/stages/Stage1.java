@@ -46,7 +46,7 @@ public class Stage1 extends Brain{
        */
       if(firstTurnTask){
         sendLogMessage("STAGE 1 : FIRST TURN");
-        if(numTurns < turnSteps){
+        if(numTurns <= turnSteps){
           stepTurn(Direction.RIGHT);
           numTurns++;
         }
@@ -59,7 +59,7 @@ public class Stage1 extends Brain{
       } // FIN FIRST TURN TASK
       else {
         sendLogMessage("STAGE 1 : TURN");
-        if(numTurns < turnSteps){
+        if(numTurns <= turnSteps){
           stepTurn(Direction.LEFT);
           numTurns++;
         }
