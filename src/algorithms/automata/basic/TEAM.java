@@ -11,4 +11,12 @@ public enum TEAM {
 		else
 			return Parameters.teamBMainBotStepTurnAngle;
 	}
+	public double getMainBotSpeed(){
+		if(this == A){
+			return Parameters.teamAMainBotSpeed;
+		}
+		else{
+			return Parameters.teamBMainBotSpeed;
+		}
+	}
 }
