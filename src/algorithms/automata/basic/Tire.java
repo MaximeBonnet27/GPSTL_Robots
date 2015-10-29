@@ -8,44 +8,34 @@ import algorithms.automata.AbstractBrainAutomaton;
 public class Tire extends AbstractBasicBrainAutomaton {
 
 	private double angle;
-	private boolean tourTir;
-	private AbstractBrainAutomaton automateAction;
+	private boolean tire;
 
-	public Tire(AbstractBrainAutomaton automateAction, double angle) {
+	public Tire(double angle) {
 		super();
-		this.automateAction = automateAction;
 		this.angle=angle;
 	}
 
 	@Override
-		public boolean isFinished() {
-			return automateAction.isFinished();
-		}
+	public boolean isFinished() {
+		return tire;
+	}
 
 
 	@Override
-		public void activate() {
-			this.tourTir = false;
-			this.automateAction.activate();
-		}
+	public void activate() {
+		this.tire=false;
+	}
 
 	@Override
-		public void step() {
-			if(!isFinished()){
-				if(tourTir){
-					delegate.fire(delegate.getHeading() + angle);
-				}
-				else {
-					automateAction.step();
-				}
-
-				tourTir = !tourTir;	
-			}
+	public void step() {
+		if(!isFinished()){
+				fire(getHeading() + angle);
+				this.tire=true;
 		}
+	}
 
 	@Override
-		public void setDelegate(IBrain delegate) {
-			this.delegate=delegate;
-			this.automateAction.setDelegate(delegate);
-		}
+	public void setDelegate(IBrain delegate) {
+		this.delegate=delegate;
+	}
 }

@@ -9,6 +9,7 @@ public class Avance extends AbstractBasicBrainAutomaton {
 	protected double distance;
 	protected double distanceParcourue;
 	protected double vitesse;
+	
 	public Avance(double distance, double vitesse) {
 		super();
 		this.distance = distance;

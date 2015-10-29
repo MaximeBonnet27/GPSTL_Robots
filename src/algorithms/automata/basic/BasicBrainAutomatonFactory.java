@@ -11,10 +11,10 @@ public class BasicBrainAutomatonFactory {
 	}
 
 	/*********
-	* TOURNE *
-	**********/
+	 * TOURNE *
+	 **********/
 
-	private static AbstractBasicBrainAutomaton tourne(double angle,Direction dir){
+	public static AbstractBasicBrainAutomaton tourne(double angle,Direction dir){
 		return new Tourne(angle, dir, team.getMainBotStepTurnAngle());
 	}
 
@@ -26,7 +26,7 @@ public class BasicBrainAutomatonFactory {
 		return tourne(team.getMainBotStepTurnAngle(),Direction.RIGHT);
 
 	}
-	
+
 	public static AbstractBasicBrainAutomaton tourneG(){
 		return tourne(Math.PI/2,Direction.LEFT);
 	}
@@ -35,7 +35,7 @@ public class BasicBrainAutomatonFactory {
 		return tourne(Math.PI/2,Direction.RIGHT);
 
 	}
-	
+
 	public static AbstractBasicBrainAutomaton tourneDemiG(){
 		return tourne(Math.PI,Direction.LEFT);
 
@@ -45,24 +45,50 @@ public class BasicBrainAutomatonFactory {
 	}
 
 	/*********
-	* AVANCE *
-	**********/
+	 * AVANCE *
+	 **********/
 
 	public static AbstractBasicBrainAutomaton avance(double distance){
 		return new Avance(distance, team.getMainBotSpeed());
 	}		
 
+	public static AbstractBasicBrainAutomaton avanceStep(){
+		return avance(team.getMainBotSpeed());
+	}	
+
+	/*********
+	 * RECUL *
+	 **********/
 	public static AbstractBasicBrainAutomaton recule(double distance){
 		return new Recule(distance, team.getMainBotSpeed());
 	}
 
+	public static AbstractBasicBrainAutomaton reculStep(){
+		return recule(team.getMainBotSpeed());
+	}	
+
 	/*******
-	* TIRE *
-	********/
-	
-	public static AbstractBasicBrainAutomaton tire(AbstractBrainAutomaton automateAction, double angle){
-		return new Tire(automateAction, angle);
+	 * TIRE *
+	 ********/
+
+	public static AbstractBasicBrainAutomaton tire(double angle){
+		return new Tire(angle);
 	}
-	
+
+	public static AbstractBasicBrainAutomaton tireDevant(){
+		return tire(0);
+	}
+
+	public static AbstractBasicBrainAutomaton tireDerriere(){
+		return tire(Math.PI);
+	}
+
+	public static AbstractBasicBrainAutomaton tireGauche(){
+		return tire(Math.PI/2);
+	}
+
+	public static AbstractBasicBrainAutomaton tireDroite(){
+		return tire(-Math.PI/2);
+	}
 
 }
