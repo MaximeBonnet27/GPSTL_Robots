@@ -17,7 +17,7 @@ public class BrainPrioriteFactory {
 
 		automata.add(BasicBrainAutomatonFactory.tourneG());
 		predicates.add(new MurDevantPredicate());
-		automata.add(BasicBrainAutomatonFactory.avance(1));
+		automata.add(BrainCycleFactory.avanceNonStop());
 		predicates.add(new TruePredicate());	
 		return (new BrainPriorite(automata, predicates));
 	}

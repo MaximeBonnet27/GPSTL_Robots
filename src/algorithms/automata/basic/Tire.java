@@ -30,6 +30,7 @@ public class Tire extends AbstractBasicBrainAutomaton {
 	public void step() {
 		if(!isFinished()){
 				fire(getHeading() + angle);
+				sendLogMessage("tire "+angle);
 				this.tire=true;
 		}
 	}

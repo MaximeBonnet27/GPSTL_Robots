@@ -8,8 +8,8 @@ public class BrainParalleleFactory {
 		return new BrainParallele(BrainCycleFactory.avanceNonStop(), BrainCycleFactory.tireNonStopDevant());
 	}
 	
-	public static BrainParallele balayageTire(double angle){
-		return new BrainParallele(BrainCycleFactory.balayage(angle),BrainCycleFactory.tireNonStopDevant());
+	public static BrainParallele balayageTire(double angle,double step){
+		return new BrainParallele(BrainCycleFactory.avanceNonStop(),BrainCycleFactory.balayageTire(angle,step));
 	}
 
 }

@@ -23,6 +23,15 @@ public class BrainSequenceFactory {
 		}
 		return new BrainSequence(etapes);
 	}
+	
+	public static BrainSequence balayageTire(double angle, double step){
+		ArrayList<AbstractBrainAutomaton> list=new ArrayList<>();
+		for(double i=-angle/2;i<angle/2;i+=step){
+			list.add(BasicBrainAutomatonFactory.tire(i));
+		}
+		
+		return new BrainSequence(list);
+	}
 
 	public static BrainSequence stage(){
 		ArrayList<AbstractBrainAutomaton> etapes = new ArrayList<>();

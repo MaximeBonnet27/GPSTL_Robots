@@ -13,6 +13,7 @@ public abstract class AbstractBrainAutomaton extends Brain{
 	abstract public void setDelegate(IBrain delegate);
 
 	abstract public boolean isFinished();
+
 	public void sendLogMessage(String message) { delegate.sendLogMessage(message); }
 	public void move(){ delegate.move(); }
 	public void moveBack(){ delegate.moveBack(); }

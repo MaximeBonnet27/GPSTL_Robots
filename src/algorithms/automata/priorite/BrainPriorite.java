@@ -13,6 +13,8 @@ public class BrainPriorite extends AbstractBrainAutomaton {
 	boolean finished;
 
 	int currentIndex;
+	int indexTrue;
+
 	public BrainPriorite() {
 		super();
 	}
@@ -26,58 +28,52 @@ public class BrainPriorite extends AbstractBrainAutomaton {
 
 
 	@Override
-		public boolean isFinished() {
-			return finished;
-		}
-
-	@Override
-		public void activate() {
-			for(AbstractBrainAutomaton automaton : automata) {
-				automaton.activate();
-			}		
-			this.finished = false;
-			for(int i = 0; i < automata.size(); ++i){
-				broadcast("YOOOO");
-				if(predicates.get(i).verify(this)){
-					currentIndex = i;	
-					break;
-				}
-
+	public boolean isFinished() {
+		for(int i = 0; i < predicates.size(); ++i){
+			if(predicates.get(i).verify(this)){	
+				indexTrue = i;	
+				return false;
 			}
 		}
+		return true;
+	}
 
 	@Override
-		public void step() {
-			if(!isFinished()){
-				int upperBound;
-				if(!automata.get(currentIndex).isFinished()){
-					upperBound = currentIndex;
-				}
-				else {
-					upperBound = automata.size();
-				}
-				for(int i = 0; i < upperBound; ++i){
-					if(predicates.get(i).verify(this)){
-						automata.get(i).activate();		
-						currentIndex = i;	
-						break;
-					}
-				}
-				if(currentIndex == automata.size()){
-					finished = true;
-				}
-				else{
-					automata.get(currentIndex).step();
-				}
+	public void activate() {
+		for(AbstractBrainAutomaton automaton : automata) {
+			automaton.activate();
+		}		
+
+		for(int i = 0; i < automata.size(); ++i){
+			if(predicates.get(i).verify(this)){
+				currentIndex = i;
+				indexTrue=i;
+				break;
 			}
 		}
+	}
+
+	@Override
+	public void step() {
+		if(!isFinished()){
+			if(currentIndex>indexTrue || (currentIndex<indexTrue && automata.get(currentIndex).isFinished())){
+				currentIndex=indexTrue;
+				automata.get(currentIndex).activate();
+				
+			}
+			if(automata.get(currentIndex).isFinished()){
+				automata.get(currentIndex).activate();
+			}
+			automata.get(currentIndex).step();
+		}
+	}
 
 
 	@Override
-		public void setDelegate(IBrain delegate) {
-			this.delegate = delegate;
-			for(AbstractBrainAutomaton automaton : automata){	
-				automaton.setDelegate(delegate);
-			}	
-		}
+	public void setDelegate(IBrain delegate) {
+		this.delegate = delegate;
+		for(AbstractBrainAutomaton automaton : automata){	
+			automaton.setDelegate(delegate);
+		}	
+	}
 }

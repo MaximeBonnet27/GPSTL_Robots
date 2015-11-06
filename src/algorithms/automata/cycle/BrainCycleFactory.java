@@ -2,6 +2,8 @@ package algorithms.automata.cycle;
 
 import java.util.ArrayList;
 
+import com.sun.swing.internal.plaf.basic.resources.basic;
+
 import algorithms.automata.AbstractBrainAutomaton;
 import algorithms.automata.basic.BasicBrainAutomatonFactory;
 import algorithms.automata.basic.TEAM;
@@ -48,6 +50,10 @@ public class BrainCycleFactory {
 		return new BrainCycle(BasicBrainAutomatonFactory.tireDroite());
 	}
 
+	public static BrainCycle balayageTire(double angle,double step){
+		return new BrainCycle(BrainSequenceFactory.balayageTire(angle, step));
+	}
+	
 	public static BrainCycle balayage(double angle){
 		ArrayList<AbstractBrainAutomaton> list=new ArrayList<>();
 		list.add(BasicBrainAutomatonFactory.tourne(angle, Direction.LEFT));
@@ -58,6 +64,7 @@ public class BrainCycleFactory {
 	public static BrainCycle rotation(double rayon){
 		int nbStep=(int) (rayon/((1-Math.cos(Parameters.teamAMainBotStepTurnAngle))*Parameters.teamAMainBotSpeed));
 		ArrayList<AbstractBrainAutomaton> list=new ArrayList<>();
+		System.out.println(nbStep);
 		for(int i=0;i<nbStep;i++){
 			list.add(BasicBrainAutomatonFactory.avanceStep());
 		}
