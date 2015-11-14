@@ -18,7 +18,7 @@ public class MortDevant implements IPredicate {
 			r=result.get(i);
 			
 			if(r.getObjectType()==Types.Wreck &&
-				result.get(i).getObjectDistance()<(Parameters.bulletRange/2) &&
+				result.get(i).getObjectDistance()<Parameters.bulletRange &&
 				isInFront(brain, result.get(i).getObjectDirection())){
 				return true;				
 			}

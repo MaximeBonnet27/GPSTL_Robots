@@ -70,6 +70,8 @@ public class BrainPrioriteFactory {
 		automata.add(BasicBrainAutomatonFactory.tourneD());
 		predicates.add(new MortDevant());
 		
+		
+		
 		automata.add(BrainCycleFactory.deplacementRand());
 		predicates.add(new TruePredicate());
 		

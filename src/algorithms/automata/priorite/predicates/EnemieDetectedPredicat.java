@@ -50,7 +50,7 @@ public class EnemieDetectedPredicat implements IPredicate {
 			if(odometre!=null){
 				double x=odometre.getX()+dist*Math.cos(dir);
 				double y=odometre.getY()+dist*Math.sin(dir);
-				if(Math.abs(x)<5000 && Math.abs(y)<5000){
+				if(Math.abs(x)<3000 && Math.abs(y)<3000){
 					Point pos=new Point();
 					pos.setLocation(x,y);
 					Odometre.setLastPositionEnnemie(pos);	

@@ -2,20 +2,17 @@ package algorithms.automata;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import com.sun.javafx.geom.Point2D;
 
 import characteristics.IBrain;
 import characteristics.IFrontSensorResult;
 import characteristics.IRadarResult;
-import characteristics.Parameters;
 import characteristics.Parameters.Direction;
 
 public class Odometre implements IBrain {
 	private static ArrayList<Odometre> obs=new ArrayList<>();
 	private static Point lastPositionEnnemie=null;
-	public static double PRECISION=Parameters.bulletRange;
+	public static double PRECISION=100;//Parameters.bulletRange/2;
 
 	public static void addObserver(Odometre o){
 		o.setLast(lastPositionEnnemie);
@@ -23,7 +20,6 @@ public class Odometre implements IBrain {
 	}
 
 	public static void setLastPositionEnnemie(Point lastPositionEnnemie) {
-		System.out.println("enemie pos:"+lastPositionEnnemie.getX()+" "+lastPositionEnnemie.getY());
 		Odometre.lastPositionEnnemie = lastPositionEnnemie;
 		for(int i=0;i<obs.size();i++){
 			obs.get(i).setLast(lastPositionEnnemie);

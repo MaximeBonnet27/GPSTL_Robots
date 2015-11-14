@@ -58,6 +58,7 @@ public class BasicBrainAutomatonFactory {
 	public static AbstractBasicBrainAutomaton esquiveWall(){
 		return new Esquive(Math.PI, Direction.LEFT, team.getMainBotStepTurnAngle(),characteristics.IFrontSensorResult.Types.WALL);
 	}
+	
 
 	/*********
 	 * AVANCE *
@@ -169,10 +170,13 @@ public class BasicBrainAutomatonFactory {
 						angleDir=Math.abs(getHeading())%(2*Math.PI);
 						
 						if(angleDir>PRECISION){
+							sendLogMessage("tourne "+Direction.LEFT);
 							stepTurn(Direction.LEFT);
 						}else if(angleDir<-PRECISION){
+							sendLogMessage("tourne "+Direction.RIGHT);
 							stepTurn(Direction.RIGHT);
 						}else{
+							sendLogMessage("avance");
 							move();
 						}
 						
@@ -181,9 +185,12 @@ public class BasicBrainAutomatonFactory {
 						
 						if(angleDir>PRECISION){
 							stepTurn(Direction.RIGHT);
+							stepTurn(Direction.RIGHT);
 						}else if(angleDir<-PRECISION){
 							stepTurn(Direction.LEFT);
+							stepTurn(Direction.LEFT);
 						}else{
+							sendLogMessage("avance");
 							move();
 						}
 					}
@@ -249,19 +256,25 @@ public class BasicBrainAutomatonFactory {
 					if(y<ydest){
 						angleDir=Math.abs(getHeading()-Math.PI/2)%(2*Math.PI);
 						if(angleDir>PRECISION){
+							sendLogMessage("tourne "+Direction.LEFT);
 							stepTurn(Direction.LEFT);
 						}else if(angleDir<-PRECISION){
+							sendLogMessage("tourne "+Direction.RIGHT);
 							stepTurn(Direction.RIGHT);
 						}else{
+							sendLogMessage("avance");
 							move();
 						}
 					}else{
 						angleDir=Math.abs(getHeading()-(3*Math.PI)/2)%(2*Math.PI);
 						if(angleDir>PRECISION){
+							sendLogMessage("tourne "+Direction.RIGHT);
 							stepTurn(Direction.RIGHT);
 						}else if(angleDir<-PRECISION){
+							sendLogMessage("tourne "+Direction.LEFT);
 							stepTurn(Direction.LEFT);
 						}else{
+							sendLogMessage("avance");
 							move();
 						}
 					}

@@ -4,6 +4,7 @@ import algorithms.automata.basic.BasicBrainAutomatonFactory;
 import algorithms.automata.priorite.BrainPrioriteFactory;
 import java.util.ArrayList;
 import algorithms.automata.AbstractBrainAutomaton;
+import algorithms.automata.Odometre;
 public class BrainSequenceFactory {
 
 	public static BrainSequence sequenceDemiTour(){
@@ -33,6 +34,14 @@ public class BrainSequenceFactory {
 		return new BrainSequence(list);
 	}
 
+	public static BrainSequence esquive(){
+		ArrayList<AbstractBrainAutomaton> list=new ArrayList<>();
+		//list.add(BasicBrainAutomatonFactory.tourneD());
+		//list.add(BasicBrainAutomatonFactory.avance(Odometre.PRECISION));
+		list.add(BasicBrainAutomatonFactory.recule(Odometre.PRECISION));
+		list.add(BasicBrainAutomatonFactory.tourneDemiD());
+		return new BrainSequence(list);
+	}
 	public static BrainSequence stage(){
 		ArrayList<AbstractBrainAutomaton> etapes = new ArrayList<>();
 		etapes.add(BasicBrainAutomatonFactory.tourneD());
