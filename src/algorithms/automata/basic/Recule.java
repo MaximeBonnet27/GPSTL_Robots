@@ -14,7 +14,8 @@ public class Recule extends Avance {
 	@Override
 	public void step() {
 		if(!this.isFinished()){
-			delegate.moveBack();
+			moveBack();
+			sendLogMessage("recule");
 			distanceParcourue += vitesse;
 		}
 	}

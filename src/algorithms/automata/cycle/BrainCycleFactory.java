@@ -72,4 +72,8 @@ public class BrainCycleFactory {
 		return new BrainCycle(new BrainSequence(list));
 	}
 	
+	public static BrainCycle deplacementRand(){
+		return new BrainCycle(BasicBrainAutomatonFactory.deplacementRand());
+	}
+	
 }

@@ -30,7 +30,8 @@ public class Tourne extends AbstractBasicBrainAutomaton {
 	@Override
 	public void step() {
 		if(!this.isFinished()){
-			delegate.stepTurn(direction);
+			stepTurn(direction);
+			sendLogMessage("tourne "+direction);
 			this.currentAngle+=Math.abs(this.stepAngle);
 		}
 	}

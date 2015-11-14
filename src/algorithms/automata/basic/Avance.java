@@ -30,7 +30,8 @@ public class Avance extends AbstractBasicBrainAutomaton {
 	@Override
 	public void step() {
 		if(!this.isFinished()){
-			delegate.move();
+			move();
+			sendLogMessage("avance");
 			distanceParcourue += vitesse;
 		}
 	}

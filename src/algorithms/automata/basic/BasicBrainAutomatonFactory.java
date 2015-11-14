@@ -1,7 +1,14 @@
 package algorithms.automata.basic;
 
+import characteristics.IBrain;
+import characteristics.Parameters;
+import characteristics.IRadarResult.Types;
 import characteristics.Parameters.Direction;
+
+import java.awt.Point;
+
 import algorithms.automata.AbstractBrainAutomaton;
+import algorithms.automata.Odometre;
 
 public class BasicBrainAutomatonFactory {
 	private static TEAM team=TEAM.B;
@@ -43,6 +50,14 @@ public class BasicBrainAutomatonFactory {
 	public static AbstractBasicBrainAutomaton tourneDemiD(){
 		return tourne(Math.PI,Direction.RIGHT);
 	}
+	
+	public static AbstractBasicBrainAutomaton esquiveWreck(){
+		return new Esquive(Math.PI/2, Direction.LEFT, team.getMainBotStepTurnAngle(),characteristics.IFrontSensorResult.Types.Wreck);
+	}
+	
+	public static AbstractBasicBrainAutomaton esquiveWall(){
+		return new Esquive(Math.PI, Direction.LEFT, team.getMainBotStepTurnAngle(),characteristics.IFrontSensorResult.Types.WALL);
+	}
 
 	/*********
 	 * AVANCE *
@@ -67,6 +82,10 @@ public class BasicBrainAutomatonFactory {
 		return recule(team.getMainBotSpeed());
 	}	
 
+	public static AbstractBasicBrainAutomaton fuite(){
+		return new Fuite(100, team.getMainBotSpeed());
+	}
+	
 	/*******
 	 * TIRE *
 	 ********/
@@ -90,5 +109,201 @@ public class BasicBrainAutomatonFactory {
 	public static AbstractBasicBrainAutomaton tireDroite(){
 		return tire(-Math.PI/2);
 	}
+	
+	public static AbstractBasicBrainAutomaton deplacementRand(){
+		return new AbstractBasicBrainAutomaton() {
+			private AbstractBrainAutomaton current;
+			private boolean doitAvance=true;
+			
+			@Override
+			public void step() {
+				current.step();
+			}
+			
+			@Override
+			public void activate() {
+				if(Math.random()<0.6 || doitAvance){
+					current=BasicBrainAutomatonFactory.avance(100+Math.random()*200);
+					current.setDelegate(delegate);
+					doitAvance=false;
+				}else if(Math.random()<0.25){
+					current=BasicBrainAutomatonFactory.tourne(Math.PI/4+Math.random()*Math.PI/2, Direction.LEFT);
+					current.setDelegate(delegate);
+					doitAvance=true;
+				}else{
+					current=BasicBrainAutomatonFactory.tourne(Math.PI/4+Math.random()*Math.PI/2, Direction.RIGHT);
+					current.setDelegate(delegate);
+					doitAvance=true;
+				}
+				current.activate();
+			}
+			
+			@Override
+			public void setDelegate(IBrain delegate) {
+				if(current!=null)
+				this.current.setDelegate(delegate);
+				this.delegate=delegate;
+			}
+			
+			@Override
+			public boolean isFinished() {
+				return current==null || current.isFinished();
+			}
+		};
+	}
+	
+	public static AbstractBasicBrainAutomaton aligneXOdometrie(){
+		return new AbstractBasicBrainAutomaton() {
+			
+			double xdest;
+			double x;
+			double stepTurn=Parameters.teamAMainBotStepTurnAngle;
+			double PRECISION=stepTurn;
+			@Override
+			public void step() {
+				
+				if(!isFinished()){
+					double angleDir;
+					
+					if(x<xdest){
+						angleDir=Math.abs(getHeading())%(2*Math.PI);
+						
+						if(angleDir>PRECISION){
+							stepTurn(Direction.LEFT);
+						}else if(angleDir<-PRECISION){
+							stepTurn(Direction.RIGHT);
+						}else{
+							move();
+						}
+						
+					}else{
+						angleDir=Math.abs(getHeading()-Math.PI)%(2*Math.PI);
+						
+						if(angleDir>PRECISION){
+							stepTurn(Direction.RIGHT);
+						}else if(angleDir<-PRECISION){
+							stepTurn(Direction.LEFT);
+						}else{
+							move();
+						}
+					}
+				}
+			}
+			
+			@Override
+			public void activate() {
+				
+			}
+			
+			@Override
+			public void setDelegate(IBrain delegate) {
+				this.delegate=delegate;
+			}
+			
+			@Override
+			public boolean isFinished() {
+				if(delegate==null)
+					return true;
+				
+				if(delegate instanceof Odometre){
+					Point last=((Odometre) delegate).getLast();
+					if( last==null)
+						return true;
+					
+					xdest=last.getX();
+					x=((Odometre) delegate).getPos().getX();
+					
+					
+					return Math.abs(xdest-x)<Odometre.PRECISION;
+				}
+				
+				if(delegate instanceof AbstractBrainAutomaton){
+					Point last=((AbstractBrainAutomaton) delegate).getOdometre().getLast();
+					if(last==null)
+						return true;
+					
+					xdest=last.getX();
+					x=((AbstractBrainAutomaton) delegate).getOdometre().getPos().getX();
+					return Math.abs(xdest-x)<Odometre.PRECISION;
+				}
+					return true;
+			}
+		};
+	}
 
+	
+	public static AbstractBasicBrainAutomaton aligneYOdometrie(){
+		return new AbstractBasicBrainAutomaton() {
+			
+			double ydest;
+			double y;
+			double stepTurn=Parameters.teamAMainBotStepTurnAngle;
+			double PRECISION=stepTurn;
+			
+			@Override
+			public void step() {
+				
+				if(!isFinished()){
+					double angleDir;
+					
+					if(y<ydest){
+						angleDir=Math.abs(getHeading()-Math.PI/2)%(2*Math.PI);
+						if(angleDir>PRECISION){
+							stepTurn(Direction.LEFT);
+						}else if(angleDir<-PRECISION){
+							stepTurn(Direction.RIGHT);
+						}else{
+							move();
+						}
+					}else{
+						angleDir=Math.abs(getHeading()-(3*Math.PI)/2)%(2*Math.PI);
+						if(angleDir>PRECISION){
+							stepTurn(Direction.RIGHT);
+						}else if(angleDir<-PRECISION){
+							stepTurn(Direction.LEFT);
+						}else{
+							move();
+						}
+					}
+				}
+			}
+			
+			@Override
+			public void activate() {
+				
+			}
+			
+			@Override
+			public void setDelegate(IBrain delegate) {
+				this.delegate=delegate;
+			}
+			
+			@Override
+			public boolean isFinished() {
+				if(delegate==null)
+					return true;
+				
+				if(delegate instanceof Odometre){
+					Point last=((Odometre) delegate).getLast();
+					if(last==null)
+						return true;
+					ydest=last.getY();
+					y=((Odometre) delegate).getPos().getY();
+					
+					
+					return Math.abs(ydest-y)<Odometre.PRECISION;
+				}
+				
+				if(delegate instanceof AbstractBrainAutomaton){
+					Point last=((AbstractBrainAutomaton) delegate).getOdometre().getLast();
+					if(last==null)
+						return true;
+					ydest=last.getY();
+					y=((AbstractBrainAutomaton) delegate).getOdometre().getPos().getY();
+					return Math.abs(ydest-y)<Odometre.PRECISION;
+				}
+					return true;
+			}
+		};
+	}
 }
