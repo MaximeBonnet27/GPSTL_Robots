@@ -2,7 +2,6 @@ package algorithms.automata.priorite.predicates;
 
 import java.util.ArrayList;
 
-import algorithms.automata.Odometre;
 import characteristics.IBrain;
 import characteristics.IRadarResult;
 import characteristics.IRadarResult.Types;

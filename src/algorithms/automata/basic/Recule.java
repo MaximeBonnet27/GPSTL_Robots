@@ -1,9 +1,5 @@
 package algorithms.automata.basic;
 
-import characteristics.IBrain;
-import characteristics.Parameters;
-import characteristics.Parameters.Direction;
-
 public class Recule extends Avance {
 	
 	public Recule(double distance, double vitesse) {

@@ -1,8 +1,6 @@
 package algorithms.automata.basic;
 
 import characteristics.IBrain;
-import characteristics.Parameters;
-import characteristics.Parameters.Direction;
 
 public class Avance extends AbstractBasicBrainAutomaton {
 	

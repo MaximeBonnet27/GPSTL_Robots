@@ -3,8 +3,8 @@ package algorithms.automata.priorite;
 import algorithms.automata.AbstractBrainAutomaton;
 import characteristics.IBrain;
 import algorithms.automata.priorite.predicates.IPredicate;
-import java.util.HashMap;
 import java.util.ArrayList;
+
 public class BrainPriorite extends AbstractBrainAutomaton {
 
 	ArrayList<AbstractBrainAutomaton> automata;

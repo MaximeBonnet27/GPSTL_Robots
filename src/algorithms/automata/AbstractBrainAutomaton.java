@@ -4,7 +4,6 @@ import characteristics.IBrain;
 import robotsimulator.Brain;
 import robotsimulator.FrontSensorResult;
 import java.util.ArrayList;
-import characteristics.IFrontSensorResult;
 import characteristics.IRadarResult;
 import characteristics.Parameters;
 public abstract class AbstractBrainAutomaton extends Brain{

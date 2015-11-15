@@ -1,7 +1,6 @@
 package algorithms.automata.basic;
 
 import characteristics.IBrain;
-import characteristics.IFrontSensorResult;
 import characteristics.IFrontSensorResult.Types;
 import characteristics.Parameters.Direction;
 

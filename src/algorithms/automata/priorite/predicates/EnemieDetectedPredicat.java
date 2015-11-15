@@ -2,9 +2,6 @@ package algorithms.automata.priorite.predicates;
 
 import java.awt.Point;
 import java.util.ArrayList;
-
-import com.sun.javafx.geom.Point2D;
-
 import algorithms.automata.AbstractBrainAutomaton;
 import algorithms.automata.Odometre;
 import characteristics.IBrain;

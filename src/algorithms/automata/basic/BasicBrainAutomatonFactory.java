@@ -2,7 +2,6 @@ package algorithms.automata.basic;
 
 import characteristics.IBrain;
 import characteristics.Parameters;
-import characteristics.IRadarResult.Types;
 import characteristics.Parameters.Direction;
 
 import java.awt.Point;

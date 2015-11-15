@@ -5,7 +5,6 @@ import java.awt.Point;
 import algorithms.automata.AbstractBrainAutomaton;
 import algorithms.automata.Odometre;
 import characteristics.IBrain;
-import characteristics.Parameters;
 
 public class EnemieLocationyPredicat implements IPredicate {
 

@@ -2,11 +2,8 @@ package algorithms.automata.cycle;
 
 import java.util.ArrayList;
 
-import com.sun.swing.internal.plaf.basic.resources.basic;
-
 import algorithms.automata.AbstractBrainAutomaton;
 import algorithms.automata.basic.BasicBrainAutomatonFactory;
-import algorithms.automata.basic.TEAM;
 import algorithms.automata.sequence.BrainSequence;
 import algorithms.automata.sequence.BrainSequenceFactory;
 import characteristics.Parameters;

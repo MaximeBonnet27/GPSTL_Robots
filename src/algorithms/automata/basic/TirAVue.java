@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import characteristics.IBrain;
 import characteristics.IRadarResult;
 import characteristics.Parameters;
-import characteristics.Parameters.Direction;
 
 public class TirAVue extends AbstractBasicBrainAutomaton {
 

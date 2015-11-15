@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import algorithms.automata.*;
 import algorithms.automata.basic.*;
 import algorithms.automata.cycle.*;
-import algorithms.automata.priorite.*;
-import algorithms.automata.sequence.*;
-import characteristics.IBrain;
-import characteristics.Parameters.Direction;
 import algorithms.automata.priorite.predicates.*;
 
 public class BrainPrioriteFactory {
